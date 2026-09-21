@@ -1,0 +1,47 @@
+openapi: 3.0.3
+info:
+  title: Amrutam Telemedicine API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+paths:
+  /auth/register:
+    post:
+      summary: Register a user
+  /auth/login:
+    post:
+      summary: Authenticate a user
+  /doctors:
+    get:
+      summary: Search doctors
+  /doctors/{doctor_id}/slots:
+    get:
+      summary: List available slots
+    post:
+      summary: Create a slot
+  /consultations/book:
+    post:
+      summary: Book a consultation
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: {type: string}
+  /consultations/{id}:
+    get:
+      summary: Get consultation
+  /consultations/{id}/complete:
+    post:
+      summary: Complete consultation
+  /consultations/{id}/prescriptions:
+    post:
+      summary: Create prescription
+  /admin/analytics:
+    get:
+      summary: Admin analytics
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
